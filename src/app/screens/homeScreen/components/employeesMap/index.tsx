@@ -3,9 +3,7 @@ import MapView, { Marker } from "react-native-maps"
 
 import { styles } from "./styles";
 import type { IUserMovement } from "../../../../../packages/model/repositories";
-import { View, Text } from "react-native";
 import { LocationIcon } from "../../../../../packages/assets/icons/LocationIcon";
-import { formatFullName } from "../../../../../packages/utils";
 
 type EmployeesMapProps = {
   employeesData: IUserMovement[]
@@ -65,10 +63,7 @@ export const EmployeesMap = ({
           }}
           title={marker.name}
         >
-          {/* <View style={styles.customMarker}>
-            <Text style={styles.markerText}>{formatFullName(marker.name)}</Text>
-            <LocationIcon />
-          </View> */}
+          <LocationIcon />
         </Marker>
       ))}
     </MapView>

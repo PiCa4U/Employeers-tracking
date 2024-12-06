@@ -25,7 +25,7 @@ export const Filters = ({
         <TextInput
           style={styles.input}
           placeholder="Введите имя"
-          value={nameFilter}  // Здесь мы передаем значение фильтра
+          value={nameFilter}
           onChangeText={setNameFilter}
         />
       </View>
@@ -34,7 +34,7 @@ export const Filters = ({
         <TextInput
           style={styles.input}
           placeholder="Введите должность"
-          value={positionFilter}  // Здесь передаем значение фильтра
+          value={positionFilter}
           onChangeText={setPositionFilter}
         />
       </View>
@@ -43,7 +43,7 @@ export const Filters = ({
         <TextInput
           style={styles.input}
           placeholder="Введите номер телефона"
-          value={phoneFilter}  // И здесь также
+          value={phoneFilter}
           onChangeText={setPhoneFilter}
         />
       </View>

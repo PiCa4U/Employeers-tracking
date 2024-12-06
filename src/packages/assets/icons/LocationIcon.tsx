@@ -4,8 +4,8 @@ import Svg, { G, Path, Mask, Ellipse, Defs } from "react-native-svg"
 export const LocationIcon = () => {
   return (
     <Svg
-      width={49}
-      height={56}
+      width={40}
+      height={40}
       viewBox="0 0 49 56"
       fill="none"
     >

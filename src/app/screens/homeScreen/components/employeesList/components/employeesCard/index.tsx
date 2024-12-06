@@ -14,7 +14,9 @@ type EmployeesCardProps = {
 
 type RootStackParamList = {
   Home: undefined;
-  Movements: { employeeId: string; name: string; phone: string; position: string };
+  Movements: {
+    employeeId: string;
+  };
 };
 
 export const EmployeesCard = ({
@@ -29,9 +31,6 @@ export const EmployeesCard = ({
   const handlePress = () => {
     navigation.navigate('Movements', {
       employeeId,
-      name,
-      phone,
-      position,
     });
   };
 
