@@ -5,7 +5,9 @@ export const styles = StyleSheet.create({
 
   },
   dateContainer: {
-    padding: 15
+    padding: 15,
+    borderBottomWidth: 1,
+    borderColor: "#E2E2E2"
   },
   date: {
     fontWeight: 500,
@@ -15,9 +17,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     backgroundColor: "#e5e7e5",
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
-    borderColor: "#E2E2E2"
+
   },
   rangeDistance: {
     flexDirection: "row",
@@ -32,5 +32,9 @@ export const styles = StyleSheet.create({
     color: "#828282",
     fontWeight: 500,
     fontSize: 14,
+  },
+  divider: {
+    borderTopWidth: 1,
+    borderColor: "#E2E2E2"
   }
 });

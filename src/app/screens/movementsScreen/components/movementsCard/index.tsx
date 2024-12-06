@@ -1,38 +1,48 @@
-import {Pressable, Text, View} from "react-native"
-import type {IRoute} from "../../../../../packages/shared/model/repositories";
-import {calculateRouteDistance, formatDate, formatTimeRange} from "../../../../../packages/shared/utils";
-import {styles} from "./styles";
-import {useNavigation} from "@react-navigation/native";
-import {StackNavigationProp} from "@react-navigation/stack";
-import type {RootStackParamList} from "../../../../../packages/shared/model/repositories";
+import React from 'react';
+import { Pressable, Text, View } from 'react-native';
+import { styles } from './styles';
+import { useNavigation } from '@react-navigation/native';
+import type {IPoint, NavigationProps} from "../../../../../packages/shared/model/repositories";
+import {calculateRouteDistance, formatTimeRange} from "../../../../../packages/shared/utils";
+
+type MovementRoute = { route: IPoint[]; originalIndex: number };
 
 type MovementsCardProps = {
-  route: IRoute
-  employeeId: string
-  index: number
-}
-export const MovementsCard = ({route, employeeId, index}: MovementsCardProps) => {
+  routes: MovementRoute[];
+  employeeId: string;
+  date: string;
+};
 
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'Movements'>>();
+export const MovementsCard = ({ routes, date, employeeId }: MovementsCardProps) => {
+  const navigation = useNavigation<NavigationProps<'Movements'>>();
 
-  const handleMapNav = () => {
+  const handleMapNav = (originalIndex: number) => {
     navigation.navigate('MovementsMap', {
       employeeId,
-      index
+      index: originalIndex,
     });
-  }
+  };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.dateContainer}>
-        <Text style={styles.date}>{formatDate(route.route[0].dt)}</Text>
-      </View>
-      <Pressable onPress={handleMapNav} style={styles.rangeContainer}>
-        <View style={styles.rangeDistance}>
-          <Text style={styles.range}>{formatTimeRange(route.route[0].dt, route.route[route.route.length - 1].dt)}</Text>
-          <Text style={styles.distance}>{calculateRouteDistance(route.route)}</Text>
+      <View style={styles.container}>
+        <View style={styles.dateContainer}>
+          <Text style={styles.date}>{date}</Text>
         </View>
-      </Pressable>
-    </View>
-  )
-}
+        {routes.map(({ route, originalIndex }, localIndex) => (
+            <Pressable
+                key={localIndex}
+                onPress={() => handleMapNav(originalIndex)}
+                style={styles.rangeContainer}
+            >
+              <View style={styles.rangeDistance}>
+                <Text style={styles.range}>
+                  {formatTimeRange(route[0].dt, route[route.length - 1].dt)}
+                </Text>
+                <Text style={styles.distance}>{calculateRouteDistance(route)}</Text>
+              </View>
+            </Pressable>
+        ))}
+        <View style={styles.divider} />
+      </View>
+  );
+};

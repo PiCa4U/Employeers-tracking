@@ -1,3 +1,5 @@
+import {IPoint, IRoute} from "../model/repositories";
+
 export const formatFullName = (fullName: string) => {
   const nameParts = fullName.split(' ');
 
@@ -89,3 +91,23 @@ export const calculateAverageSpeed = (distance: number, timeInMinutes: number): 
 
   return `${averageSpeed.toFixed(2)} км/ч`;
 };
+
+export const groupRoutesByDate = (
+    routes: IRoute[]
+): Record<string, { route: IPoint[]; originalIndex: number }[]> => {
+  return routes.reduce((acc, routeItem, index) => {
+    const date = formatDate(routeItem.route[0].dt);
+
+    if (!acc[date]) {
+      acc[date] = [];
+    }
+
+    acc[date].push({
+      route: routeItem.route,
+      originalIndex: index,
+    });
+
+    return acc;
+  }, {} as Record<string, { route: IPoint[]; originalIndex: number }[]>);
+};
+
