@@ -51,7 +51,7 @@ export const MovementsMapScreen:FC<RootScreenProps<'MovementsMap'>> = ({ route, 
       </Pressable>
       <MapView
         style={styles.map}
-        initialRegion={initialRegion}
+        region={initialRegion}
       >
         <Polyline
           coordinates={routeCoordinates}
