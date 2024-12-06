@@ -1,4 +1,3 @@
-import * as React from "react"
 import Svg, { G, Path, Mask, Ellipse, Defs } from "react-native-svg"
 
 export const LocationIcon = () => {

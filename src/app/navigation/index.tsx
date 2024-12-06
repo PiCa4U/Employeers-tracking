@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from '../screens/homeScreen';
 import { MovementsScreen } from '../screens/movementsScreen';
 import { MovementsMapScreen } from '../screens/movementsMapScreen';
-import type { RootStackParamList } from '../../packages/model/repositories';
+import type { RootStackParamList } from '../../packages/shared/model/repositories';
 
 const Stack = createStackNavigator<RootStackParamList>();
 

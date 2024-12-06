@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { Text, Pressable } from 'react-native';
 import { styles } from './styles';
 import { useNavigation } from '@react-navigation/native';
 
 import { StackNavigationProp } from '@react-navigation/stack';
+import {RootScreenProps} from "../../../../../../../packages/shared/model/repositories";
 
 type EmployeesCardProps = {
   name: string;
@@ -12,24 +13,18 @@ type EmployeesCardProps = {
   employeeId: string;
 };
 
-type RootStackParamList = {
-  Home: undefined;
-  Movements: {
-    employeeId: string;
-  };
-};
 
-export const EmployeesCard = ({
+export const EmployeesCard:FC<EmployeesCardProps> = ({
   name,
   phone,
   position,
   employeeId,
-}: EmployeesCardProps) => {
+}) => {
 
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'Movements'>>();
+  const {navigate} = useNavigation<RootScreenProps<'MovementsMap'>['navigation']>();
 
   const handlePress = () => {
-    navigation.navigate('Movements', {
+    navigate('Movements', {
       employeeId,
     });
   };

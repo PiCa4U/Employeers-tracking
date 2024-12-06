@@ -6,9 +6,10 @@ import { styles } from './styles';
 import { HomePageHeader } from './components/header';
 import { EmployeesMap } from './components/employeesMap';
 
-import employeesData from '../../../packages/mocks/data.json';
+import employeesData from '../../../packages/shared/mocks/data.json';
 import { EmployeesList } from './components/employeesList';
 import { Filters } from './components/filters';
+import {SafeAreaView} from "react-native-safe-area-context";
 
 export const HomeScreen = () => {
   const [isMap, setIsMap] = useState<boolean>(false);
@@ -41,8 +42,7 @@ export const HomeScreen = () => {
 
   return (
     <TouchableWithoutFeedback onPress={closeFilters}>
-      <View style={styles.safeArea}>
-        <StatusBar barStyle="dark-content" backgroundColor="#306FE3" />
+      <SafeAreaView style={styles.safeArea}>
         <HomePageHeader
           isMap={isMap}
           setIsMap={setIsMap}
@@ -68,7 +68,7 @@ export const HomeScreen = () => {
             <EmployeesList employeesData={filteredEmployees} />
           )}
         </View>
-      </View>
+      </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 };

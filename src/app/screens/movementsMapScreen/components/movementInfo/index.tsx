@@ -1,13 +1,13 @@
 import { Pressable, Text, View, Linking } from "react-native";
 import { styles } from "./style";
-import type { IUserMovement } from "../../../../../packages/model/repositories";
+import type { IUserMovement } from "../../../../../packages/shared/model/repositories";
 import {
     calculateAverageSpeed,
     calculateRouteDistance,
     formatDate,
     formatTimeDifference,
     formatTimeRange
-} from "../../../../../packages/utils";
+} from "../../../../../packages/shared/utils";
 
 type MovementInfoProps = {
     foundEmployee: IUserMovement;

@@ -12,7 +12,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
   },
-
+  map:{
+    width: '100%', height: '100%'
+  },
   headerText: {
     flex: 1,
     textAlign: 'center',

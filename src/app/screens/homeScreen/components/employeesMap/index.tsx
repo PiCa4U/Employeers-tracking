@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import MapView, { Marker } from "react-native-maps"
 
 import { styles } from "./styles";
-import type { IUserMovement } from "../../../../../packages/model/repositories";
-import { LocationIcon } from "../../../../../packages/assets/icons/LocationIcon";
+import type { IUserMovement } from "../../../../../packages/shared/model/repositories";
+import { LocationIcon } from "../../../../../packages/shared/assets/icons/LocationIcon";
 
 type EmployeesMapProps = {
   employeesData: IUserMovement[]

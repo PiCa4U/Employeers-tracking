@@ -1,7 +1,7 @@
 import { View, Text, Pressable } from "react-native";
 import { styles } from "./styles";
 
-import { Settings } from "../../../../../packages/assets/icons/Settings";
+import { Settings } from "../../../../../packages/shared/assets/icons/Settings";
 
 type HomePageHeaderProps = {
   isMap: boolean

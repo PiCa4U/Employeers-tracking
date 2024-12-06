@@ -1,27 +1,25 @@
-import React from 'react';
+import React, {FC} from 'react';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import { View, Pressable, Text, StatusBar } from 'react-native';
-import { Arrow } from '../../../packages/assets/icons/arrow';
+import { Arrow } from '../../../packages/shared/assets/icons/arrow';
 import { styles } from './styles';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../packages/model/repositories';
-import { formatFullName } from '../../../packages/utils';
-import employeesData from '../../../packages/mocks/data.json';
+import { RootScreenProps} from '../../../packages/shared/model/repositories';
+import { formatFullName } from '../../../packages/shared/utils';
+import employeesData from '../../../packages/shared/mocks/data.json';
 import {MovementInfo} from "./components/movementInfo";
-import {MovementsStart} from "../../../packages/assets/icons/MovementsStart";
-import {MovementsEnd} from "../../../packages/assets/icons/MovementsEnd";
+import {MovementsStart} from "../../../packages/shared/assets/icons/MovementsStart";
+import {MovementsEnd} from "../../../packages/shared/assets/icons/MovementsEnd";
+import {SafeAreaView} from "react-native-safe-area-context";
 
-export const MovementsMapScreen = ({ route }: any) => {
+export const MovementsMapScreen:FC<RootScreenProps<'MovementsMap'>> = ({ route, navigation }) => {
   const { employeeId, index } = route.params;
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'Movements'>>();
 
   const foundEmployee = employeesData.employees.find((emp) => emp.id === employeeId);
 
   if (!foundEmployee) return null;
 
   const handleBack = () => {
-    navigation.navigate('Movements', { employeeId });
+    navigation.goBack();
   };
 
   const routeItem = foundEmployee.routes[index];
@@ -44,8 +42,7 @@ export const MovementsMapScreen = ({ route }: any) => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar barStyle="dark-content" backgroundColor="#306FE3" />
+    <SafeAreaView style={styles.container}>
       <Pressable style={styles.header} onPress={handleBack}>
         <View style={styles.arrowContainer}>
           <Arrow />
@@ -53,7 +50,7 @@ export const MovementsMapScreen = ({ route }: any) => {
         <Text style={styles.headerText}>{`Передвижения ${formatFullName(foundEmployee.name)}`}</Text>
       </Pressable>
       <MapView
-        style={{ width: '100%', height: '100%' }}
+        style={styles.map}
         initialRegion={initialRegion}
       >
         <Polyline
@@ -69,6 +66,6 @@ export const MovementsMapScreen = ({ route }: any) => {
         </Marker>
       </MapView>
       <MovementInfo foundEmployee={foundEmployee} index={index}/>
-    </View>
+    </SafeAreaView>
   );
 };
