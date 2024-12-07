@@ -1,7 +1,11 @@
-# Employeers-tracking
+# Employee Tracking App
 
-Установка зависимостей
+## Installing dependencies
+
 ```bash
 npm install
-npx expo start
+```
+## launching the project
 
+```bash
+npx expo start
