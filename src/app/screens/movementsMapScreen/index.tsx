@@ -10,9 +10,11 @@ import {MovementInfo} from "./components/movementInfo";
 import {MovementsStart} from "../../../packages/shared/assets/icons/MovementsStart";
 import {MovementsEnd} from "../../../packages/shared/assets/icons/MovementsEnd";
 import {SafeAreaView} from "react-native-safe-area-context";
+import {useTranslation} from "../../../packages/shared/hooks";
 
 export const MovementsMapScreen:FC<RootScreenProps<'MovementsMap'>> = ({ route, navigation }) => {
   const { employeeId, index } = route.params;
+  const { t } = useTranslation("translation");
 
   const foundEmployee = employeesData.employees.find((emp) => emp.id === employeeId);
 
@@ -47,7 +49,7 @@ export const MovementsMapScreen:FC<RootScreenProps<'MovementsMap'>> = ({ route, 
         <View style={styles.arrowContainer}>
           <Arrow />
         </View>
-        <Text style={styles.headerText}>{`Передвижения ${formatFullName(foundEmployee.name)}`}</Text>
+        <Text style={styles.headerText}>{`${t("MovementsMap.header.movements")} ${formatFullName(foundEmployee.name)}`}</Text>
       </Pressable>
       <MapView
         style={styles.map}

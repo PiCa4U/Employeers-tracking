@@ -8,6 +8,7 @@ import {
     formatTimeDifference,
     formatTimeRange
 } from "../../../../../packages/shared/utils";
+import {useTranslation} from "../../../../../packages/shared/hooks";
 
 type MovementInfoProps = {
     foundEmployee: IUserMovement;
@@ -40,6 +41,7 @@ const sendWhatsAppMessage = (phoneNumber: string, message: string) => {
 
 export const MovementInfo = ({ foundEmployee, index }: MovementInfoProps) => {
   const route = foundEmployee.routes[index].route;
+  const { t } = useTranslation("translation");
 
   const date = `${formatDate(route[0].dt)}, ${formatTimeRange(route[0].dt, route[route.length - 1].dt)}`;
   const time = formatTimeDifference(route[0].dt, route[route.length - 1].dt);
@@ -55,15 +57,15 @@ export const MovementInfo = ({ foundEmployee, index }: MovementInfoProps) => {
           <Text style={styles.dateText}>{date}</Text>
         </View>
         <View style={styles.infoContainer}>
-          <Text style={styles.infoText}>Продолжительность</Text>
+          <Text style={styles.infoText}>{t("MovementsMap.bottomPad.duration")}</Text>
           <Text style={styles.resultsText}>{time}</Text>
         </View>
         <View style={styles.infoContainer}>
-          <Text style={styles.infoText}>Расстояние</Text>
+          <Text style={styles.infoText}>{t("MovementsMap.bottomPad.distance")}</Text>
           <Text style={styles.resultsText}>{distance}</Text>
         </View>
         <View style={styles.infoContainer}>
-          <Text style={styles.infoText}>Средняя скорость</Text>
+          <Text style={styles.infoText}>{t("MovementsMap.bottomPad.averageSpeed")}</Text>
           <Text style={styles.resultsText}>{averageSpeed}</Text>
         </View>
       </View>
@@ -72,13 +74,13 @@ export const MovementInfo = ({ foundEmployee, index }: MovementInfoProps) => {
           style={styles.writeButton}
           onPress={() => sendWhatsAppMessage(foundEmployee.phone, "Добрый день, подскажите пожалуйста, какой номер обращения у вас сейчас в работе?")}
         >
-          <Text style={styles.writeText}>Написать</Text>
+          <Text style={styles.writeText}>{t("MovementsMap.bottomPad.buttons.write")}</Text>
         </Pressable>
         <Pressable
           style={styles.callButton}
           onPress={() => makeCall(foundEmployee.phone)}
         >
-          <Text style={styles.callText}>Позвонить</Text>
+          <Text style={styles.callText}>{t("MovementsMap.bottomPad.buttons.call")}</Text>
         </Pressable>
       </View>
     </View>

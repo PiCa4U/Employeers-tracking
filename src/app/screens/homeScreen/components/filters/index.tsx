@@ -1,5 +1,6 @@
 import { View, Text, TextInput } from "react-native";
 import { styles } from "./styles";
+import {useTranslation} from "../../../../../packages/shared/hooks";
 
 type FiltersProps = {
   nameFilter: string;
@@ -18,31 +19,33 @@ export const Filters = ({
   phoneFilter,
   setPhoneFilter,
 }: FiltersProps) => {
+  const { t } = useTranslation("translation");
+
   return (
     <View style={styles.container}>
       <View style={styles.filter}>
-        <Text style={styles.text}>По имени</Text>
+        <Text style={styles.text}>{t("HomePage.header.filters.byName")}</Text>
         <TextInput
           style={styles.input}
-          placeholder="Введите имя"
+          placeholder={`${t("HomePage.header.filters.namePlaceholder")}`}
           value={nameFilter}
           onChangeText={setNameFilter}
         />
       </View>
       <View style={styles.filter}>
-        <Text style={styles.text}>По должности</Text>
+        <Text style={styles.text}>{t("HomePage.header.filters.byPosition")}</Text>
         <TextInput
           style={styles.input}
-          placeholder="Введите должность"
+          placeholder={`${t("HomePage.header.filters.posPlaceholder")}`}
           value={positionFilter}
           onChangeText={setPositionFilter}
         />
       </View>
       <View style={styles.filter}>
-        <Text style={styles.text}>По номеру телефона</Text>
+        <Text style={styles.text}>{t("HomePage.header.filters.byPhone")}</Text>
         <TextInput
           style={styles.input}
-          placeholder="Введите номер телефона"
+          placeholder={`${t("HomePage.header.filters.phonePlaceholder")}`}
           value={phoneFilter}
           onChangeText={setPhoneFilter}
         />

@@ -1,4 +1,5 @@
 import {IPoint, IRoute} from "../model/repositories";
+import i18n, { t } from 'i18next';
 
 export const formatFullName = (fullName: string) => {
   const nameParts = fullName.split(' ');
@@ -36,7 +37,7 @@ export const haversineDistance = (coord1: Coordinates, coord2: Coordinates): num
   return R * c;
 };
 
-export const calculateRouteDistance = (route: { dt: number; lat: number; lng: number }[]): string => {
+export const calculateRouteDistance = (route: IPoint[]): string => {
   let totalDistance = 0;
 
   for (let i = 0; i < route.length - 1; i++) {
@@ -47,7 +48,7 @@ export const calculateRouteDistance = (route: { dt: number; lat: number; lng: nu
   }
 
   const roundedDistance = totalDistance.toFixed(2);
-  return `${roundedDistance} км`;
+  return `${roundedDistance} ${t('utils.km')}`;
 };
 
 export const formatDate = (timestamp: number): string => {
@@ -56,7 +57,7 @@ export const formatDate = (timestamp: number): string => {
     day: 'numeric',
     month: 'long',
   };
-  return date.toLocaleDateString('ru-RU', options);
+  return date.toLocaleDateString(`${i18n.language}`, options);
 };
 
 export const formatTimeRange = (startTimestamp: number, endTimestamp: number): string => {
@@ -78,19 +79,22 @@ export const formatTimeDifference = (startDt: number, endDt: number): string => 
   const minutes = diffInMinutes % 60;
 
   if (hours > 0) {
-    return minutes > 0 ? `${hours} ч ${minutes} мин` : `${hours} ч`;
+    return minutes > 0
+        ? `${hours} ${t('utils.time.hours')} ${minutes} ${t('utils.time.minutes')}`
+        : `${hours} ${t('utils.time.hours')}`;
   }
-  return `${minutes} мин`;
+  return `${minutes} ${t('utils.time.minutes')}`;
 };
 
 export const calculateAverageSpeed = (distance: number, timeInMinutes: number): string => {
-  if (timeInMinutes === 0) return "0 км/ч";
+  if (timeInMinutes === 0) return `0 ${t('utils.speed')}`;
 
   const timeInHours = timeInMinutes / 60;
   const averageSpeed = distance / timeInHours;
 
-  return `${averageSpeed.toFixed(2)} км/ч`;
+  return `${averageSpeed.toFixed(2)} ${t('utils.speed')}`;
 };
+
 
 export const groupRoutesByDate = (
     routes: IRoute[]
